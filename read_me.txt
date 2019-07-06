@@ -26,8 +26,10 @@ TEST 11610 0 0 0 -9 A G A A G G A A A G A G G G C C A A A G 0 0 C G A ...
 WHAT SHOULU DO:
 #set path, final_report name, map name,out name
 setwd("C:\\Users\\lhp\\Desktop\\ped\\")
+source("https://raw.githubusercontent.com/hanpengluo/illumina-raw-data-transform/master/illumina_tran_plink.R")
 final_report_name<-"Neogen_China_BOVUHDV03_20161018_FinalReport.txt"
 map_name<-"SNP_Map.txt"
 out_name<-"test"
 #allele coding of snp "Forward","Top","AB"
 coding_type<-"Top"
+illumina_plink_tran(final_report_name,map_name,out_name,coding_type = "Top")
