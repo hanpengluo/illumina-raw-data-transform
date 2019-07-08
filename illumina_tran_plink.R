@@ -1,4 +1,6 @@
 illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type){
+  if(!require(devtools)) install.packages("devtools")
+  if(!require(readr)) devtools::install_github("tidyverse/readr")
   if(!require(readr)) install.packages("readr")
   if(!require(tidyverse)) install.packages("tidyverse")
   final_report<-read_tsv(final_report_name,col_names = F,skip = 10)
