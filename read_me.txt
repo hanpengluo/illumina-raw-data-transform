@@ -27,9 +27,9 @@ WHAT SHOULU DO:
 #set path, final_report name, map name,out name
 setwd("C:\\Users\\lhp\\Desktop\\ped\\")
 source("https://raw.githubusercontent.com/hanpengluo/illumina-raw-data-transform/master/illumina_tran_plink.R")
-final_report_name<-"Neogen_China_BOVUHDV03_20161018_FinalReport.txt"
-map_name<-"SNP_Map.txt"
-out_name<-"test"
+final_report_name<-"Neogen_China_BOVUHDV03_20161018_FinalReport.txt"#finale report file name
+map_name<-"SNP_Map.txt"#snp map file name
+out_name<-"test" #output file name
 #allele coding of snp "Forward","Top","AB"
 coding_type<-"Top"
 illumina_plink_tran(final_report_name,map_name,out_name,coding_type = "Top")
