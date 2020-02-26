@@ -1,6 +1,6 @@
 illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type){
   if(!require(data.table)) install.packages("data.table")
-  final_report<-fread("final.txt",header = F,skip = 10)
+  final_report<-fread(final_report_name,header = F,skip = 10)
   final_report<-as.data.frame(final_report)
   names(final_report)<-c("SNP_Name","Sample_ID","Allele1_Forward","Allele2_Forward","Allele1_Top","Allele2_Top","Allele1_AB","Allele2_AB","GC_Score","X","Y")
   final_report$Sample_ID<-as.character(final_report$Sample_ID)
@@ -46,7 +46,7 @@ illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type){
   allele_matrix[,6]<--9
   snp_list<-as.data.frame(final_report[sample_position,1])
   names(snp_list)<-"snp"
-  map<-fread("SNP_Map.txt",header = F,col.names = c(paste("V",c(1:9),sep = "")),fill = T)
+  map<-fread(map_name,header = F,col.names = c(paste("V",c(1:9),sep = "")),fill = T)
   map<-map[-c(1,2),2:4]
   names(map)<-c("snp","chr","position")
   map<-merge(snp_list,map,by="snp",sort = F)
