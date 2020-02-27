@@ -46,11 +46,11 @@ illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type){
   allele_matrix[,6]<--9
   snp_list<-as.data.frame(final_report[sample_position,1])
   names(snp_list)<-"snp"
-  map<-fread(map_name,header = F,col.names = c(paste("V",c(1:9),sep = "")),fill = T)
-  map<-map[-c(1,2),2:4]
+  map<-fread(map_name,fill = T)
+  map<-map[,2:4]
   names(map)<-c("snp","chr","position")
   map<-merge(snp_list,map,by="snp",sort = F)
-  map[,4]<-0
+  map$mendel<-0
   #allele_matrix<-as.data.frame(allele_matrix)
   fwrite(allele_matrix,paste(out_name,".ped",sep = ""),quote = F,col.names = F,row.names = F,sep = " ")
   fwrite(map[,c(2,1,4,3)],paste(out_name,".map",sep = ""),quote = F,col.names = F,row.names = F,sep = " ")
