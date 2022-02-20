@@ -25,17 +25,21 @@ Total Samples	307
 ```
 TEST  11610  0  0  0  -9  A G A A G G A A A G A G G G C C A A A G 0 0 C G A ...
 ```
+#### Also need a file for call rate and set the threshold for the call rate
+
 
 ### WHAT SHOULU DO:
 
 ```R
 #set path, final_report name, map name,out name
-setwd("C:\\Users\\lhp\\Desktop\\ped\\")
+
 source("https://raw.githubusercontent.com/hanpengluo/illumina-raw-data-transform/master/illumina_tran_plink.R")
 final_report_name<-"Neogen_China_BOVUHDV03_20161018_FinalReport.txt"#finale report file name
 map_name<-"SNP_Map.txt"#snp map file name
+callrate_threshold <- 0.9
 out_name<-"test" #output file name
 #allele coding of snp "Forward","Top","AB"
 coding_type<-"Top"
-illumina_plink_tran(final_report_name,map_name,out_name,coding_type = "Top")
+illumina_plink_tran(final_report_name,map_name,out_name,coding_type = "Top",callrate_threshold)
+
 '''
