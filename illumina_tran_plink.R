@@ -1,5 +1,18 @@
-illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type){
+illumina_plink_tran<-function(final_report_name,map_name,out_name,coding_type,callrate_threshold){
   if(!require(data.table)) install.packages("data.table")
+  if(!require(ggplot2)) install.packages("ggplot2")
+  list.files(pattern = 'DNAReport.csv')
+  DNA_report_name <- gsub(pattern = 'FinalReport.txt','DNAReport.csv',final_report_name)
+  DNA_report <- read.csv(DNA_report_name,skip = 2)
+  names(DNA_report)
+  DNA_report_fail <- DNA_report[which(DNA_report$Call_Rate<callrate_threshold),]
+  ggplot(data = DNA_report,aes(x=Call_Rate))+
+    geom_density(fill='gold3',color='gold3')+
+    geom_vline(xintercept =callrate_threshold,color='red')+
+    labs(title = paste0('Total samples:',nrow(DNA_report),'; ','Samples lower than threshold:',nrow(DNA_report_fail)))+
+    theme_light()
+  ggsave('CallRate_distribution.pdf')
+  write.csv(DNA_report_fail,gsub(pattern = 'FinalReport.txt','DNAReport_failed.csv',final_report_name),row.names = F)
   final_report<-fread(final_report_name,header = F,skip = 10)
   final_report<-as.data.frame(final_report)
   names(final_report)<-c("SNP_Name","Sample_ID","Allele1_Forward","Allele2_Forward","Allele1_Top","Allele2_Top","Allele1_AB","Allele2_AB","GC_Score","X","Y")
